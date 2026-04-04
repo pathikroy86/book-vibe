@@ -6,8 +6,6 @@ function App() {
 
   return (
     <>
-
-      <h1>React+Vive</h1>
       <Navbar></Navbar>
     </>
   )
