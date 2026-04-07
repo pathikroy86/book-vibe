@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useLoaderData, useParams } from 'react-router';
+import BookCollection, { BookContext } from '../../Components/Context/BookCollection';
 
 const BookDetails = () => {
     const books = useLoaderData();
     const params = useParams();
     const expectedBook = books.find(book => book.bookId == params.id);
-    console.log(expectedBook);
+
+
+    const { handleMarkAsRead, handleWishlist } = useContext(BookContext);
+
     return (
         <div className='container mx-auto md:flex gap-10 mt-5 md:mt-10'>
             <figure className='flex-1 flex justify-center items-center bg-neutral-200 rounded-lg'>
@@ -29,8 +33,8 @@ const BookDetails = () => {
                 <p className='space-x-28 mb-3'><span className='text-[#131313B3]'>Year of Publishing:</span><span className='font-semibold'>{expectedBook.yearOfPublishing}</span></p>
                 <p className='space-x-28 mb-3'><span className='text-[#131313B3]'>Rating:</span><span className='font-semibold'>{expectedBook.rating}</span></p>
                 <div className='flex gap-3'>
-                    <button className='btn'>Read</button>
-                    <button className='btn btn-info'>Wishlist</button>
+                    <button onClick={() => handleMarkAsRead(expectedBook)} className='btn'>Mark as Read</button>
+                    <button onClick={() => handleWishlist(expectedBook)} className='btn btn-info'>Wishlist</button>
                 </div>
             </div>
         </div>
